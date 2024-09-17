@@ -2,20 +2,38 @@ import Header from "../components/Layout/Header/Header";
 import Footer from "../components/Layout/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { decrease, deleteProducts, increase } from "../redux/reducer/cartSlice";
+import Swal from "sweetalert2";
 
 const Sepet = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // cart.total ve cart.kdv'yi güvenli bir şekilde sayıya çevir
   const total = Number(cart.total) || 0;
   const kdv = Number(cart.kdv) || 0;
 
-  // KDV tutarını hesapla
   const kdvAmount = ((total * kdv) / 100).toFixed(2);
-
-  // Toplam tutarı KDV ile birlikte hesapla
   const totalWithKdv = (total + Number(kdvAmount)).toFixed(2);
+
+  const handleDecrease = (urun) => {
+    if (urun.quantity === 1) {
+      Swal.fire({
+        title: "Silmek istediğinizden emin misiniz?",
+        text: "ürünü sepetten sileceksiniz.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Evet, sil!",
+        cancelButtonText: "Hayır",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(deleteProducts(urun));
+        }
+      });
+    } else {
+      dispatch(decrease(urun));
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -75,11 +93,12 @@ const Sepet = () => {
                     </div>
                     <div className="flex items-center space-x-2">
                       <button
-                        onClick={() => dispatch(decrease(urun))}
+                        onClick={() => handleDecrease(urun)}
                         className="bg-gray-200 text-gray-700 rounded-full px-2"
                       >
                         -
                       </button>
+
                       <span className="font-semibold">{urun.quantity}</span>
                       <button
                         onClick={() => dispatch(increase(urun))}
@@ -90,7 +109,22 @@ const Sepet = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => dispatch(deleteProducts(urun))}
+                    onClick={() => {
+                      Swal.fire({
+                        title: "Silmek?",
+                        text: "Ürünü Sepetten Silmek istediğine Emin misin!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Evet Sil!",
+                        cancelButtonText: "Hayır",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          dispatch(deleteProducts(urun));
+                        }
+                      });
+                    }}
                     className="text-red-500 hover:text-red-700 transition duration-300"
                   >
                     <svg
@@ -124,12 +158,8 @@ const Sepet = () => {
             </div>
 
             <div className="flex justify-between items-center mb-4">
-              <p className="text-xl font-semibold text-gray-800">
-                KDV(%{kdv})
-              </p>
-              <p className="text-xl font-bold text-green-600">
-                +{kdvAmount}₺
-              </p>
+              <p className="text-xl font-semibold text-gray-800">KDV(%{kdv})</p>
+              <p className="text-xl font-bold text-green-600">+{kdvAmount}₺</p>
             </div>
             <div className="flex justify-between items-center mb-6">
               <p className="text-xl font-semibold text-gray-800">Toplam</p>

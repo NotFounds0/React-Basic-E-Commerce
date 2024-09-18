@@ -10,7 +10,8 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
-import ProductDetail from "./pages/productsDetail";
+import ProductsPages from "./pages/productsPages";
+import ProductsDetails from "./pages/productsDetails";
 import ProfilePage from "./pages/profile/profilePage";
 import Sepet from "./pages/Sepet";
 import Notfound from "./pages/NotFound";
@@ -108,8 +109,8 @@ function App() {
             </ProtectedLogReg>
           }
         />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/productsDetail/:id" element={<ProductDetail />} />
+        <Route path="/products" element={<ProductsPages />} />
+        <Route path="/productsDetail/:id" element={<ProductsDetails />} />
         <Route
           path="/profile/:id"
           element={

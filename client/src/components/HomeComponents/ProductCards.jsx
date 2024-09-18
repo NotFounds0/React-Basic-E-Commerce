@@ -6,7 +6,6 @@ import { addProducts } from "../../redux/reducer/cartSlice";
 
 const ProductCard = ({ product, pDetailClick }) => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
 
   if (!product) {
     return toast.error("Ürün Çekilirken Hata Oluştur.");

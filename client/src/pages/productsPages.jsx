@@ -41,7 +41,7 @@ const productsPages = () => {
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const handleProductDetailClick = (id) => {
-    nav(`/productDetail/${id}`);
+    nav(`/ProductsDetails/${id}`);
   };
 
   return (

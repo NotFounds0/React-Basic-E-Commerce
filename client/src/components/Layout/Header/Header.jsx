@@ -79,7 +79,7 @@ const Header = () => {
   }, []);
 
   const handleProductDetailClick = (id) => {
-    nav(`/productDetail/${id}`);
+    nav(`/ProductsDetails/${id}`);
   };
 
   const NavLink = ({ href, children }) => (

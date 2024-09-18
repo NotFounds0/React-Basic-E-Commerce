@@ -80,7 +80,7 @@ const ProductsContent = () => {
   };
 
   const handleProductDetail = (id) => {
-    nav(`/productDetail/${id}`);
+    nav(`/ProductsDetails/${id}`);
   };
   return (
     <>

@@ -110,7 +110,7 @@ function App() {
           }
         />
         <Route path="/products" element={<ProductsPages />} />
-        <Route path="/productsDetail/:id" element={<ProductsDetails />} />
+        <Route path="/ProductsDetails/:id" element={<ProductsDetails />} />
         <Route
           path="/profile/:id"
           element={

@@ -39,7 +39,7 @@ const Products = () => {
   }, [category, searchTerm, products]);
 
   const handleProductDetailClick = (id) => {
-    nav(`/productDetail/${id}`);
+    nav(`/ProductsDetails/${id}`);
   };
 
   return (

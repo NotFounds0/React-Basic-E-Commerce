@@ -16,7 +16,9 @@ const ProductsContent = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/products/get");
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/products/get`
+      );
       if (res.status === 200) {
         setTimeout(() => {
           setProducts(res.data);
@@ -60,8 +62,12 @@ const ProductsContent = () => {
             text: "Başarıyla Ürün Silindi.",
             icon: "success",
           });
-          await axios.delete(`http://localhost:5000/api/products/delete/${id}`);
-          const res = await axios.get("http://localhost:5000/api/products/get");
+          await axios.delete(
+            `${import.meta.env.VITE_API_URL}/api/products/delete/${id}`
+          );
+          const res = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/products/get`
+          );
           if (res.status === 200) {
             setProducts(res.data);
             setLoading(false);

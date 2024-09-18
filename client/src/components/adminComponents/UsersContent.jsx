@@ -14,7 +14,7 @@ const UsersContent = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/get");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/get`);
         if (res.status === 200) {
           setTimeout(() => {
             setUsers(res.data);
@@ -36,7 +36,7 @@ const UsersContent = () => {
   const handleSave = async (updatedUser) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/users/update/${updatedUser._id}`,
+        `${import.meta.env.VITE_API_URL}/api/users/update/${updatedUser._id}`,
         updatedUser
       );
 
@@ -68,7 +68,7 @@ const UsersContent = () => {
         cancelButtonText: "Hayır",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await axios.delete(`http://localhost:5000/api/users/delete/${id}`);
+          await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/delete/${id}`);
           setUsers(users.filter((user) => user._id !== id));
           Swal.fire("Silindi!", "Kullanıcı başarıyla silindi.", "success");
         }

@@ -25,7 +25,7 @@ const ProfilePage = () => {
     const getUserInfo = async () => {
       try {
         const getuser = await axios.get(
-          `http://localhost:5000/api/users/get/${id}`
+          `${import.meta.env.VITE_API_URL}/api/users/get/${id}`
         );
         const data = getuser.data;
         setUserInfo(data);

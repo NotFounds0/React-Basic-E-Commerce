@@ -36,8 +36,6 @@ const ProductCard = ({ product, pDetailClick }) => {
       toast.success("Ürün sepete eklendi");
     }
   };
-
-  console.log(cart);
   return (
     <div className="bg-white h-full rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between py-2 px-2">
       <div className="">

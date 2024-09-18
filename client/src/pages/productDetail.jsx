@@ -28,7 +28,7 @@ const ProductDetail = () => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/products/get/${id}`
+          `${import.meta.env.VITE_API_URL}/api/products/get/${id}`
         );
         const data = res.data;
         setGetProductsDetail(data);

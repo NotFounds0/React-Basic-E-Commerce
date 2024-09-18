@@ -20,7 +20,7 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
       const id = localStorage.getItem("userID");
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/users/get/${id}`
+          `${import.meta.env.VITE_API_URL}/api/users/get/${id}`
         );
         if (res.status === 200) {
           setProfileData({
@@ -68,7 +68,7 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
 
         try {
           const res = await axios.put(
-            `http://localhost:5000/api/users/update/${id}`,
+            `${import.meta.env.VITE_API_URL}/api/users/update/${id}`,
             { fullName, email, phoneNumber, adress }
           );
           if (res.status === 200) {
@@ -104,7 +104,7 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
 
         try {
           const res = await axios.delete(
-            `http://localhost:5000/api/users/delete/${id}`
+            `${import.meta.env.VITE_API_URL}/api/users/delete/${id}`
           );
           if (res.status === 200) {
             setTimeout(() => {

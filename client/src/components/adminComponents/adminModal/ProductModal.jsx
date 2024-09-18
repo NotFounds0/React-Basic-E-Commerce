@@ -49,12 +49,12 @@ const ProductModal = ({
     try {
       if (currentProduct) {
         await axios.put(
-          `http://localhost:5000/api/products/update/${currentProduct._id}`,
+          `${import.meta.env.VITE_API_URL}/api/products/update/${currentProduct._id}`,
           postData
         );
         toast.success("Ürün başarıyla güncellendi.");
       } else {
-        await axios.post("http://localhost:5000/api/products/create", postData);
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/products/create`, postData);
         toast.success("Ürün başarıyla eklendi.");
       }
       setModal(false);

@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/users/create", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/create`, {
         email,
         password,
         fullName,

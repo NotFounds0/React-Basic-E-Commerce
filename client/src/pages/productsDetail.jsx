@@ -5,7 +5,7 @@ import ProductCard from "../components/HomeComponents/ProductCards";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const ProductsPage = () => {
+const productsDetail = () => {
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
@@ -96,4 +96,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default productsDetail;

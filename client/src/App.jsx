@@ -10,8 +10,7 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
-import ProductsPage from "./pages/ProductsPage";
-import ProductDetail from "./pages/ProductDetail";
+import ProductDetail from "./pages/productsDetail";
 import ProfilePage from "./pages/profile/profilePage";
 import Sepet from "./pages/Sepet";
 import Notfound from "./pages/NotFound";
@@ -110,7 +109,7 @@ function App() {
           }
         />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/productDetail/:id" element={<ProductDetail />} />
+        <Route path="/productsDetail/:id" element={<ProductDetail />} />
         <Route
           path="/profile/:id"
           element={

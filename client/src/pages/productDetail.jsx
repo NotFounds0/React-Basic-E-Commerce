@@ -16,7 +16,7 @@ import { addProducts } from "../redux/reducer/cartSlice";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-const ProductDetail = () => {
+const productDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -180,4 +180,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default productDetail;

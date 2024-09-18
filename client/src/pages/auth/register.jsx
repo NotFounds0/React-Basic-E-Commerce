@@ -20,14 +20,14 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const res = await axios.post("http://localhost:5000/api/users/create", {
         email,
         password,
         fullName,
       });
-  
+
       if (res.status === 201) {
         toast.success("Kayıt Başarılı. Yönlendiriliyorsunuz...");
         resetForm();
@@ -37,16 +37,13 @@ const Register = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        // Eğer e-posta zaten kayıtlıysa bu mesaj gösterilecek
         toast.error("Bu e-posta zaten kayıtlı.");
       } else {
-        // Diğer hatalar için genel hata mesajı
         toast.error("Kayıt işlemi sırasında bir hata oluştu.");
       }
       console.log(error);
     }
   };
-  
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200">

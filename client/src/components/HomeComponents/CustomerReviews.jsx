@@ -1,45 +1,48 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { FaStar, FaQuoteLeft } from 'react-icons/fa';
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { FaStar, FaQuoteLeft } from "react-icons/fa";
 
 const CustomerReviews = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
     });
   }, []);
 
   const reviews = [
     {
       id: 1,
-      name: 'Ayşe Yılmaz',
+      name: "Ayşe Yılmaz",
       rating: 5,
-      comment: 'Harika ürünler! Kalite ve fiyat dengesi mükemmel.',
-      image: 'https://randomuser.me/api/portraits/women/1.jpg',
+      comment: "Harika ürünler! Kalite ve fiyat dengesi mükemmel.",
+      image: "https://randomuser.me/api/portraits/women/1.jpg",
     },
     {
       id: 2,
-      name: 'Mehmet Kaya',
+      name: "Mehmet Kaya",
       rating: 4,
-      comment: 'Çok memnun kaldım, kesinlikle tavsiye ederim.',
-      image: 'https://randomuser.me/api/portraits/men/1.jpg',
+      comment: "Çok memnun kaldım, kesinlikle tavsiye ederim.",
+      image: "https://randomuser.me/api/portraits/men/1.jpg",
     },
     {
       id: 3,
-      name: 'Zeynep Demir',
+      name: "Zeynep Demir",
       rating: 5,
-      comment: 'Müşteri hizmetleri çok ilgili, sorunumu hemen çözdüler.',
-      image: 'https://randomuser.me/api/portraits/women/2.jpg',
+      comment: "Müşteri hizmetleri çok ilgili, sorunumu hemen çözdüler.",
+      image: "https://randomuser.me/api/portraits/women/2.jpg",
     },
   ];
 
   return (
     <div className="bg-gray-100 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12" data-aos="fade-down">
+        <h2
+          className="text-4xl font-bold text-center mb-12"
+          data-aos="fade-down"
+        >
           Müşteri Yorumları
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -63,7 +66,11 @@ const CustomerReviews = () => {
                     {[...Array(5)].map((_, i) => (
                       <FaStar
                         key={i}
-                        className={i < review.rating ? 'text-yellow-400' : 'text-gray-300'}
+                        className={
+                          i < review.rating
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }
                       />
                     ))}
                   </div>

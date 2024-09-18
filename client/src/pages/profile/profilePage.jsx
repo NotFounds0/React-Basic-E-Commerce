@@ -11,11 +11,17 @@ import Loading from "../../components/Loading";
 const ProfilePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState();
-  const [loading, setLoading] = useState(false); // Loading state'i
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const nav = useNavigate();
 
+  const loggedInUserId = localStorage.getItem("userID");
+
   useEffect(() => {
+    if (id !== loggedInUserId) {
+      nav(`/profile/${loggedInUserId}`);
+    }
+
     const getUserInfo = async () => {
       try {
         const getuser = await axios.get(
@@ -28,7 +34,7 @@ const ProfilePage = () => {
       }
     };
     getUserInfo();
-  }, [id]);
+  }, [id, loggedInUserId, nav]);
 
   const handleLogout = () => {
     Swal.fire({
@@ -42,7 +48,7 @@ const ProfilePage = () => {
       cancelButtonText: "Hayır",
     }).then((result) => {
       if (result.isConfirmed) {
-        setLoading(true); // Loading state'ini başlat
+        setLoading(true); 
         setTimeout(() => {
           localStorage.removeItem("authToken");
           localStorage.removeItem("userID");
@@ -109,7 +115,13 @@ const ProfilePage = () => {
                       {userInfo.role === "admin" ? (
                         <b className="">
                           {" "}
-                          Rol: <a href="/admin" className="bg-red-500 px-3 py-1 rounded-full hover:underline">{userInfo.role}</a>
+                          Rol:{" "}
+                          <a
+                            href="/admin"
+                            className="bg-red-500 px-3 py-1 rounded-full hover:underline"
+                          >
+                            {userInfo.role}
+                          </a>
                         </b>
                       ) : null}
                     </div>
@@ -136,7 +148,9 @@ const ProfilePage = () => {
                   <div className="bg-gray-50 p-4 rounded-lg shadow">
                     <p className="text-gray-600">Adres</p>
                     <p className="font-medium text-lg">
-                      {userInfo.adress ? userInfo.adress : "Address Girilmemiş"}
+                      {userInfo.adress
+                        ? userInfo.adress
+                        : "Adres Girilmemiş"}
                     </p>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg shadow">
@@ -147,7 +161,6 @@ const ProfilePage = () => {
                   </div>
                 </div>
               </div>
-             
             </div>
           ) : (
             <div>

@@ -59,7 +59,7 @@ const ProductModal = ({
       }
       setModal(false);
       setCurrentProduct(null);
-      onProductUpdate(); // Ürünleri yeniden çek
+      onProductUpdate();
     } catch (error) {
       toast.error("Bir şeyler ters gitti.");
       console.log(error);

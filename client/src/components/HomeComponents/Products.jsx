@@ -42,7 +42,6 @@ const Products = () => {
     nav(`/productDetail/${id}`);
   };
 
-
   return (
     <div className="bg-gray-100 ">
       <div className="container mx-auto px-4 py-12">
@@ -105,11 +104,7 @@ const Products = () => {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <div
-                  key={product._id} // Değiştirilen key
-                  data-aos="zoom-in"
-                  data-aos-delay={200}
-                >
+                <div key={product._id} data-aos="zoom-in" data-aos-delay={200}>
                   <ProductCard
                     product={product}
                     pDetailClick={handleProductDetailClick}

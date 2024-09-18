@@ -6,23 +6,15 @@ const jwt = require("jsonwebtoken");
 router.post("/create", async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
-
-    // Tüm alanların doldurulmuş olduğundan emin olun
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: "Tüm alanlar gereklidir." });
     }
-
-    // Aynı e-posta adresi ile kullanıcı olup olmadığını kontrol et
     const existingUser = await userSchema.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Bu e-posta zaten kayıtlı." });
     }
-
-    // Şifreyi hashle
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Yeni kullanıcı oluştur ve kaydet
     const newUser = new userSchema({
       fullName,
       email,
@@ -101,7 +93,7 @@ router.post("/login", async (req, res) => {
         message: "Giriş Bilgileri Doğru.",
         token,
         user: {
-          _id: user._id, // Kullanıcı ID'sini ekledik
+          _id: user._id,
           email: user.email,
           fullName: user.fullName,
         },

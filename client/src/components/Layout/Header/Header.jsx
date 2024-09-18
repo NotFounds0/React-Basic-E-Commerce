@@ -25,7 +25,6 @@ const Header = () => {
   const searchRef = useRef(null);
   const nav = useNavigate();
 
-  // API'den ürün verilerini çekme
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -39,7 +38,6 @@ const Header = () => {
     fetchProducts();
   }, []);
 
-  // Arama sonuçlarını filtreleme
   useEffect(() => {
     if (searchTerm.trim() !== "") {
       const filtered = products.filter((product) =>
@@ -54,7 +52,6 @@ const Header = () => {
     }
   }, [searchTerm, products]);
 
-  // Eşleşen kısımları vurgulama fonksiyonu
   const highlightMatch = (name, searchTerm) => {
     const parts = name.split(new RegExp(`(${searchTerm})`, "gi"));
     return parts.map((part, index) =>
@@ -68,7 +65,6 @@ const Header = () => {
     );
   };
 
-  // Dışarı tıklamayı yakalama
   const handleClickOutside = (e) => {
     if (searchRef.current && !searchRef.current.contains(e.target)) {
       setShowResults(false);
@@ -101,10 +97,8 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md">
-      {/* Main header */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-wrap items-center justify-between">
-          {/* Logo */}
           <a
             href="/"
             className="text-2xl font-bold transform hover:scale-105 transition duration-300 flex-shrink-0 mr-4"
@@ -113,7 +107,6 @@ const Header = () => {
             <span className="text-gray-800">Mağaza</span>
           </a>
 
-          {/* Search bar */}
           <div
             className="flex-grow order-3 sm:order-2 mt-4 sm:mt-0 w-full sm:w-auto sm:mx-4 lg:mx-10 relative"
             ref={searchRef}
@@ -149,9 +142,7 @@ const Header = () => {
             )}
           </div>
 
-          {/* Navigation and Icons */}
           <div className="flex items-center space-x-4 order-2 sm:order-3 ml-auto sm:ml-0">
-            {/* Navigation - Desktop */}
             <nav className="hidden lg:flex space-x-6">
               <NavLink href="/">Ana Sayfa</NavLink>
               <NavLink href="/products">Ürünler</NavLink>
@@ -159,7 +150,6 @@ const Header = () => {
               <NavLink href="/iletisim">İletişim</NavLink>
             </nav>
 
-            {/* Icons */}
             <div className="flex items-center space-x-4">
               <FiBell className="text-gray-600 hover:text-teal-600 cursor-pointer transition duration-300 transform hover:scale-110" />
               <FiHeart className="text-gray-600 hover:text-teal-600 cursor-pointer transition duration-300 transform hover:scale-110" />
@@ -209,6 +199,15 @@ const Header = () => {
             </div>
           </div>
         </div>
+
+        {isMenuOpen && (
+          <nav className="lg:hidden flex flex-col mt-4 space-y-4">
+            <NavLink href="/">Ana Sayfa</NavLink>
+            <NavLink href="/products">Ürünler</NavLink>
+            <NavLink href="/hakkimizda">Hakkımızda</NavLink>
+            <NavLink href="/iletisim">İletişim</NavLink>
+          </nav>
+        )}
       </div>
     </header>
   );

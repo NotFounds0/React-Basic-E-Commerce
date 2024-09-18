@@ -1,20 +1,25 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaHeart,
   FaShare,
   FaFacebook,
   FaTwitter,
   FaInstagram,
-  FaStar,
 } from "react-icons/fa";
 import Header from "../components/Layout/Header/Header";
 import Footer from "../components/Layout/Footer/Footer";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useDispatch } from "react-redux";
+import { addProducts } from "../redux/reducer/cartSlice";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+
   const [quantity, setQuantity] = useState(1);
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [getProductsDetail, setGetProductsDetail] = useState([]);
@@ -34,26 +39,41 @@ const ProductDetail = () => {
     getProducts();
   }, [id]);
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
   const toggleShareOptions = () => {
     setShowShareOptions(!showShareOptions);
+  };
+
+  const handleAddToCart = () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      Swal.fire({
+        title: "Ürünü Satın Almak İçin Giriş Yapınız.",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonText: "Giriş Yap",
+        cancelButtonText: "Kayıt Ol",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/login";
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          window.location.href = "/register";
+        }
+      });
+    } else {
+      if (getProductsDetail) {
+        const productToAdd = { ...getProductsDetail, quantity };
+        dispatch(addProducts(productToAdd));
+        toast.success("Ürün Ekleme Başarılı");
+      }
+    }
   };
 
   return (
     <>
       <Header />
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto p-4 my-10 ">
         {getProductsDetail ? (
-          <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden relative">
+          <div className="flex flex-col md:flex-row bg-whites shadow-xl shadow-gray-500 rounded-lg overflow-hidden relative py-10">
             <div className="md:w-2/5 p-4">
               <div className="relative">
                 <img
@@ -105,28 +125,12 @@ const ProductDetail = () => {
               )}
 
               <p className="text-gray-600 mb-4">{getProductsDetail.desc}</p>
-              <div className="flex items-center mb-4">
-                <label htmlFor="quantity" className="mr-2">
-                  Adet:
-                </label>
-                <div className="flex items-center border rounded gap-5">
-                  <button
-                    onClick={decreaseQuantity}
-                    className="px-3 py-1 bg-gray-200 hover:bg-gray-300 transition-colors duration-300"
-                  >
-                    -
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    onClick={increaseQuantity}
-                    className="px-3 py-1 bg-gray-200 hover:bg-gray-300 transition-colors duration-300"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
+
               <div className="flex space-x-4 mb-4">
-                <button className="bg-orange-500 text-white px-6 py-3 rounded transition-transform duration-300 hover:scale-105">
+                <button
+                  className="bg-orange-500 text-white px-6 py-3 rounded transition-transform duration-300 hover:scale-105"
+                  onClick={handleAddToCart}
+                >
                   Sepete Ekle
                 </button>
                 <button className="border border-gray-300 px-4 py-2 rounded transition-transform duration-300 hover:scale-105">

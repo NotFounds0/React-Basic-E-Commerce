@@ -43,7 +43,6 @@ const AdminPage = () => {
   };
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
       <div className="w-64 bg-white shadow-md">
         <div className="p-4">
           <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
@@ -82,7 +81,6 @@ const AdminPage = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 overflow-y-auto p-8">{renderContent()}</div>
     </div>
   );

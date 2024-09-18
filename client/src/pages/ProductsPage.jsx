@@ -50,7 +50,6 @@ const ProductsPage = () => {
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Ürünlerimiz</h1>
 
-        {/* Arama ve Filtreleme */}
         <div className="flex justify-center mb-8">
           <input
             type="text"
@@ -72,7 +71,6 @@ const ProductsPage = () => {
           </select>
         </div>
 
-        {/* Ürün Listesi */}
         <div>
           {loading ? (
             <div className="text-center">Yükleniyor...</div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import UsersModal from "./adminModal/UsersModal";
-import { FaEdit, FaTrash, FaSearch } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import Loading from "../Loading";
 
 const UsersContent = () => {

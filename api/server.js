@@ -25,7 +25,10 @@ const connect = async () => {
 };
 
 app.get("/api", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello Gardaş");
+});
+app.get("/", (req, res) => {
+  res.send("Hello Gardaş");
 });
 
 app.listen(port, () => {

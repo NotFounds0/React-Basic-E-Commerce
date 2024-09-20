@@ -31,7 +31,7 @@ Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
 
 1. **Depoyu klonlayın**:
    ```bash
-   git clone https://github.com/kullanici_adi/proje_adi.git
+   git clone https://github.com/NotFounds0/React-Basic-E-Commerce.git
    cd proje_adi
    ```
 
